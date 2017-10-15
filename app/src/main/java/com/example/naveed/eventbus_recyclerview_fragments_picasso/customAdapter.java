@@ -21,7 +21,7 @@ public class customAdapter  extends RecyclerView.Adapter<customAdapter.ViewHolde
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView txtView;
         public ImageButton imgBtn;
@@ -37,6 +37,12 @@ public class customAdapter  extends RecyclerView.Adapter<customAdapter.ViewHolde
             imgBtn= (ImageButton) itemView.findViewById(R.id.img_btn);
             imgView = (ImageView) itemView.findViewById(R.id.img_view);
 
+            imgBtn.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            delete(getPosition());
         }
     }
 
@@ -73,6 +79,11 @@ public class customAdapter  extends RecyclerView.Adapter<customAdapter.ViewHolde
         viewHolder.txtView.setText(contact.getName());
         viewHolder.imgView.setImageResource(contact.getImg());
 
+    }
+
+    public void delete(int position){
+         mContacts.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override
